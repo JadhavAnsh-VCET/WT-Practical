@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ansh - Full-Stack & Mobile Developer</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #ec4899;
+            --accent-color: #14b8a6;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --gradient-5: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: #1e293b;
+            background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+        }
+        
+        .navbar {
+            background: rgba(255, 255, 255, 0.85) !important;
+            backdrop-filter: blur(20px) saturate(180%);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+        
+        .nav-link {
+            position: relative;
+            color: #475569 !important;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover {
+            color: #667eea !important;
+        }
+        
+        .nav-link:hover::after {
+            width: 80%;
+        }
+        
+        .hero-section {
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #6366f1);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: white;
+            padding: 120px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none"/><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+            opacity: 0.3;
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-title {
+            font-weight: 700;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+            animation: expandLine 3s ease-in-out infinite;
+        }
+        
+        @keyframes expandLine {
+            0%, 100% { width: 60px; }
+            50% { width: 100px; }
+        }
+        
+        .badge-tech {
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            margin: 0.25rem;
+            font-size: 0.85rem;
+            display: inline-block;
+            white-space: nowrap;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .badge-tech:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .card {
+            border: none;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .card:hover::before {
+            opacity: 1;
+        }
+        
+        .card-equal-height {
+            height: 100%;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+        }
+        
+        .project-card,
+        .experience-card {
+            height: auto;
+        }
+        
+        .project-card {
+            border-left: 5px solid transparent;
+            border-image: linear-gradient(180deg, #667eea, #764ba2) 1;
+        }
+        
+        .project-card:hover {
+            border-image: linear-gradient(180deg, #764ba2, #f093fb) 1;
+        }
+        
+        .experience-card {
+            border-left: 5px solid transparent;
+            border-image: linear-gradient(180deg, #43e97b, #38f9d7) 1;
+        }
+        
+        .experience-card:hover {
+            border-image: linear-gradient(180deg, #38f9d7, #4facfe) 1;
+        }
+        
+        .tech-category {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            overflow-wrap: break-word;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .tech-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 16px;
+            padding: 2px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .tech-category:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+        }
+        
+        .tech-category:hover::before {
+            opacity: 1;
+        }
+        
+        .btn-primary {
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-primary:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn-outline-light {
+            border: 2px solid white;
+            color: white;
+            border-radius: 50px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-light:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-outline-dark,
+        .btn-outline-primary {
+            border-radius: 50px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-outline-dark:hover,
+        .btn-outline-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .value-item {
+            padding: 1rem;
+            border-left: 4px solid transparent;
+            border-image: linear-gradient(180deg, #667eea, #764ba2) 1;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .value-item:hover {
+            transform: translateX(10px);
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+        
+        footer {
+            background: var(--dark-bg);
+            color: white;
+            padding: 2rem 0;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        section {
+            overflow: hidden;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .card-body ul {
+            padding-left: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        
+        .card-body ul li {
+            margin-bottom: 0.25rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 100px 0 60px;
+            }
+            
+            .hero-section h1 {
+                font-size: 1.75rem;
+            }
+            
+            .hero-section .lead {
+                font-size: 1rem;
+            }
+            
+            .icon-box {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            .card-body {
+                padding: 1rem;
+            }
+            
+            .card-body h4 {
+                font-size: 1.1rem;
+            }
+            
+            .card-body h3 {
+                font-size: 1.25rem;
+            }
+            
+            .project-emoji {
+                font-size: 2rem;
+            }
+            
+            .badge-tech {
+                padding: 0.35rem 0.7rem;
+                font-size: 0.7rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .btn-lg {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .py-5 {
+                padding-top: 2.5rem !important;
+                padding-bottom: 2.5rem !important;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-section h1 {
+                font-size: 1.5rem;
+            }
+            
+            .card-body ul {
+                font-size: 0.9rem;
+            }
+            
+            .value-item {
+                padding: 0.75rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        .icon-box {
+            width: 70px;
+            height: 70px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .icon-box::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            padding: 2px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.5), rgba(255,255,255,0.1));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+        
+        .icon-box:hover {
+            transform: translateY(-5px) rotate(5deg) scale(1.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .bg-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2) !important;
+        }
+        
+        .bg-success {
+            background: linear-gradient(135deg, #43e97b, #38f9d7) !important;
+        }
+        
+        .bg-info {
+            background: linear-gradient(135deg, #4facfe, #00f2fe) !important;
+        }
+        
+        .bg-warning {
+            background: linear-gradient(135deg, #fa709a, #fee140) !important;
+        }
+        
+        .bg-danger {
+            background: linear-gradient(135deg, #f093fb, #f5576c) !important;
+        }
+        
+        .bg-secondary {
+            background: linear-gradient(135deg, #a8edea, #fed6e3) !important;
+        }
+        
+        .bg-dark {
+            background: linear-gradient(135deg, #0f172a, #1e293b) !important;
+        }
+        
+        .project-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.1));
+        }
+        
+        .project-card:hover .project-emoji {
+            transform: scale(1.2) rotate(10deg);
+            filter: drop-shadow(0 10px 20px rgba(102, 126, 234, 0.3));
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Ansh Jadhav</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tech">Tech Stack</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h1 class="display-4 fw-bold mb-4">Building Scalable Web & Mobile Products with Modern Engineering</h1>
+                    <p class="lead mb-3">
+                        <span class="badge bg-light text-dark me-2 mb-2">Full-Stack Developer (MERN, Next.js, NestJS)</span>
+                        <span class="badge bg-light text-dark mb-2">Mobile App Developer (Flutter & React Native)</span>
+                    </p>
+                    <p class="lead mb-4">
+                        Hi, I'm <strong>Ansh Jadhav</strong> — a product-driven software engineer focused on building high-quality web platforms and cross-platform mobile applications. I specialize in full-stack systems, AI-powered platforms, and performance-focused mobile apps designed for real-world use.
+                    </p>
+                    <a href="#projects" class="btn btn-light btn-lg me-3">View Projects</a>
+                    <a href="#contact" class="btn btn-outline-light btn-lg">Get in Touch</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="section-title">About Me</h2>
+                    <p class="lead mt-4">
+                        I'm a computer engineering student and professional-grade developer with hands-on experience delivering production-ready web and mobile applications.
+                    </p>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-4 mb-3">
+                            <div class="icon-box bg-primary text-white">
+                                <i class="bi bi-globe"></i>
+                            </div>
+                            <h5>Web Platforms</h5>
+                            <p>Building with Next.js and NestJS</p>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="icon-box bg-success text-white">
+                                <i class="bi bi-phone"></i>
+                            </div>
+                            <h5>Mobile Applications</h5>
+                            <p>Flutter and React Native development</p>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="icon-box bg-info text-white">
+                                <i class="bi bi-cpu"></i>
+                            </div>
+                            <h5>AI Systems</h5>
+                            <p>Education and SaaS AI-powered backends</p>
+                        </div>
+                    </div>
+
+                    <p class="mt-4">
+                        My strength lies in <strong>bridging frontend experience with backend engineering</strong>, ensuring products are visually polished, technically sound, and scalable.
+                    </p>
+
+                    <h5 class="mt-5 mb-3">I strongly value:</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="value-item">
+                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                Clean architecture & separation of concerns
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="value-item">
+                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                Scalable API design
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="value-item">
+                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                Thoughtful mobile UX
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="value-item">
+                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                Long-term maintainability over short-term fixes
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            
+            <div class="row mt-5">
+                <div class="col-lg-10 mx-auto">
+                    
+                    <!-- Experience 1 -->
+                    <div class="card experience-card mb-4">
+                        <div class="card-body">
+                            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start mb-3 gap-2">
+                                <div class="flex-grow-1">
+                                    <h4 class="mb-1">Full Stack Web Developer</h4>
+                                    <p class="text-muted mb-0">
+                                        <i class="bi bi-building me-1"></i>Surfboard Ventures • Part-time Intern
+                                    </p>
+                                </div>
+                                <span class="badge bg-success flex-shrink-0">Currently Working</span>
+                            </div>
+                            <p class="mb-3">
+                                Working on real production web platforms, contributing across both frontend and backend systems.
+                            </p>
+                            <ul class="mb-3">
+                                <li>Building frontend features using React and Next.js</li>
+                                <li>Developing and integrating REST APIs using Node.js and NestJS</li>
+                                <li>Designing and working with MongoDB schemas</li>
+                                <li>Collaborating in a real startup environment with production constraints</li>
+                            </ul>
+                            <div>
+                                <span class="badge badge-tech bg-primary">Next.js</span>
+                                <span class="badge badge-tech bg-primary">NestJS</span>
+                                <span class="badge badge-tech bg-primary">MongoDB</span>
+                                <span class="badge badge-tech bg-primary">REST APIs</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Experience 2 -->
+                    <div class="card experience-card mb-4">
+                        <div class="card-body">
+                            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start mb-3 gap-2">
+                                <div class="flex-grow-1">
+                                    <h4 class="mb-1">React Native Trainee</h4>
+                                    <p class="text-muted mb-0">
+                                        <i class="bi bi-building me-1"></i>Raw Engineering
+                                    </p>
+                                </div>
+                                <span class="badge bg-secondary flex-shrink-0">On-Going</span>
+                            </div>
+                            <p class="mb-3">
+                                On-going hands-on training focused on React Native fundamentals and real-world mobile development.
+                            </p>
+                            <ul class="mb-3">
+                                <li>Built mobile UI using functional components and hooks</li>
+                                <li>Integrated APIs and managed application state</li>
+                                <li>Learned performance-aware cross-platform development practices</li>
+                            </ul>
+                            <div>
+                                <span class="badge badge-tech bg-warning">React Native</span>
+                                <span class="badge badge-tech bg-warning">Hooks</span>
+                                <span class="badge badge-tech bg-warning">API Integration</span>
+                            </div>
+                        </div>
+                    </div>
+       
+                    <!-- Experience 3 -->
+                    <div class="card experience-card mb-4">
+                        <div class="card-body">
+                            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start mb-3 gap-2">
+                                <div class="flex-grow-1">
+                                    <h4 class="mb-1">Flutter Intern</h4>
+                                    <p class="text-muted mb-0">
+                                        <i class="bi bi-building me-1"></i>EDBA Academy
+                                    </p>
+                                </div>
+                                <span class="badge bg-secondary flex-shrink-0">3 Months</span>
+                            </div>
+                            <p class="mb-3">
+                                Contributed to Flutter-based mobile applications, focusing on clean UI, reusable components, and structured state management.
+                            </p>
+                            <ul class="mb-3">
+                                <li>Built reusable Flutter widgets and UI components</li>
+                                <li>Implemented screens using Provider / ChangeNotifier</li>
+                                <li>Integrated APIs and handled async workflows</li>
+                                <li>Ensured UI consistency and responsiveness across devices</li>
+                            </ul>
+                            <div>
+                                <span class="badge badge-tech bg-info">Flutter</span>
+                                <span class="badge badge-tech bg-info">Provider</span>
+                                <span class="badge badge-tech bg-info">API Integration</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section id="tech" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Tech Stack</h2>
+            
+            <div class="row mt-5">
+                <div class="col-lg-10 mx-auto">
+                    
+                    <!-- Web Development -->
+                    <div class="tech-category">
+                        <h4 class="mb-3"><i class="bi bi-code-slash me-2 text-primary"></i>Web Development</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6 class="mb-2">Frontend</h6>
+                                <span class="badge badge-tech bg-primary">Next.js</span>
+                                <span class="badge badge-tech bg-primary">React.js</span>
+                                <span class="badge badge-tech bg-primary">Tailwind CSS</span>
+                                <span class="badge badge-tech bg-primary">Shadcn UI</span>
+                                <span class="badge badge-tech bg-primary">HeroUI</span>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="mb-2">Backend</h6>
+                                <span class="badge badge-tech bg-success">Node.js</span>
+                                <span class="badge badge-tech bg-success">Express.js</span>
+                                <span class="badge badge-tech bg-success">NestJS</span>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <h6 class="mb-2">Databases</h6>
+                                <span class="badge badge-tech bg-warning text-dark">MongoDB</span>
+                                <span class="badge badge-tech bg-danger">Redis</span>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="mb-2">Auth & Security</h6>
+                                <span class="badge badge-tech bg-dark">JWT</span>
+                                <span class="badge badge-tech bg-dark">RBAC</span>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <h6 class="mb-2">Deployment</h6>
+                                <div class="d-flex flex-wrap gap-1">
+                                    <span class="badge badge-tech bg-secondary">Cloudflare Pages</span>
+                                    <span class="badge badge-tech bg-secondary">Cloudflare Workers</span>
+                                    <span class="badge badge-tech bg-secondary">Vercel</span>
+                                    <span class="badge badge-tech bg-secondary">Docker</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Development -->
+                    <div class="tech-category">
+                        <h4 class="mb-3"><i class="bi bi-phone me-2 text-success"></i>Mobile App Development</h4>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5 class="mb-3">Flutter</h5>
+                                <ul class="list-unstyled">
+                                    <li><i class="bi bi-check2 text-success me-2"></i>Production-ready Flutter apps</li>
+                                    <li><i class="bi bi-check2 text-success me-2"></i>Provider / ChangeNotifier architecture</li>
+                                    <li><i class="bi bi-check2 text-success me-2"></i>Camera, media picker, background services</li>
+                                    <li><i class="bi bi-check2 text-success me-2"></i>Push notifications (Appwrite)</li>
+                                    <li><i class="bi bi-check2 text-success me-2"></i>Clean, reusable widget systems</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="mb-3">React Native</h5>
+                                <ul class="list-unstyled">
+                                    <li><i class="bi bi-check2 text-primary me-2"></i>Modern React Native development</li>
+                                    <li><i class="bi bi-check2 text-primary me-2"></i>Functional components & hooks</li>
+                                    <li><i class="bi bi-check2 text-primary me-2"></i>API integration and async handling</li>
+                                    <li><i class="bi bi-check2 text-primary me-2"></i>Expo & CLI workflows</li>
+                                    <li><i class="bi bi-check2 text-primary me-2"></i>Performance-focused UI implementation</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI & Advanced Systems -->
+                    <div class="tech-category">
+                        <h4 class="mb-3"><i class="bi bi-robot me-2 text-info"></i>AI & Advanced Systems</h4>
+                        <div class="row">
+                            <div class="col-12">
+                                <span class="badge badge-tech bg-info">AI-generated exams & quizzes</span>
+                                <span class="badge badge-tech bg-info">LLM integrations (Gemini)</span>
+                                <span class="badge badge-tech bg-info">JSON schema validation</span>
+                                <span class="badge badge-tech bg-info">Retry & repair logic</span>
+                                <span class="badge badge-tech bg-info">AI content pipelines</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects Section -->
+    <section id="projects" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            
+            <div class="row mt-5">
+                <div class="col-lg-10 mx-auto">
+                    
+                    <!-- Project 1 -->
+                    <div class="card project-card mb-4">
+                        <div class="card-body">
+                            <div class="project-emoji">🚀</div>
+                            <h3 class="mb-2">PathCraft AI</h3>
+                            <p class="text-muted mb-3">AI-Powered Learning & Roadmap Platform</p>
+                            <p class="mb-3">
+                                A scalable learning platform focused on personalized education powered by AI.
+                            </p>
+                            <ul class="mb-3">
+                                <li>AI-generated learning roadmaps</li>
+                                <li>Scraped reading & video content stored in CMS</li>
+                                <li>Markdown-based content rendering</li>
+                                <li>Quizzes, exams, and flashcards</li>
+                                <li>Learner-type analysis & recommendations</li>
+                                <li>Credit-based monetization system</li>
+                                <li>Certificates & completion tracking</li>
+                            </ul>
+                            <div>
+                                <strong>Stack:</strong>
+                                <span class="badge badge-tech bg-primary">Next.js</span>
+                                <span class="badge badge-tech bg-success">NestJS</span>
+                                <span class="badge badge-tech bg-warning text-dark">MongoDB</span>
+                                <span class="badge badge-tech bg-info">CMS</span>
+                                <span class="badge badge-tech bg-secondary">AI APIs</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="card project-card mb-4">
+                        <div class="card-body">
+                            <div class="project-emoji">🎓</div>
+                            <h3 class="mb-2">AI Exam System</h3>
+                            <p class="text-muted mb-3">NestJS-Based Backend Platform</p>
+                            <p class="mb-3">
+                                A production-grade exam generation and evaluation system.
+                            </p>
+                            <ul class="mb-3">
+                                <li>Supports multiple question types (T/F, single, multiple choice)</li>
+                                <li>Strict validation of AI-generated data</li>
+                                <li>Automatic retry & repair logic</li>
+                                <li>User progress tracking and persistence</li>
+                                <li>Designed for scale (300+ questions per exam)</li>
+                            </ul>
+                            <div>
+                                <strong>Stack:</strong>
+                                <span class="badge badge-tech bg-success">NestJS</span>
+                                <span class="badge badge-tech bg-info">AI APIs</span>
+                                <span class="badge badge-tech bg-warning text-dark">MongoDB</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="card project-card mb-4">
+                        <div class="card-body">
+                            <div class="project-emoji">🏔</div>
+                            <h3 class="mb-2">Offbeat Pravasi</h3>
+                            <p class="text-muted mb-3">Trek Discovery & Booking Mobile App</p>
+                            <p class="mb-3">
+                                A mobile app focused on travel discovery, safety, and engagement.
+                            </p>
+                            <ul class="mb-3">
+                                <li>Trek discovery & booking flow</li>
+                                <li>Achievements and goals</li>
+                                <li>Wishlist & saved treks</li>
+                                <li>SOS emergency system (auto call/SMS + live location)</li>
+                                <li>Push notifications and alerts</li>
+                            </ul>
+                            <div>
+                                <strong>Stack:</strong>
+                                <span class="badge badge-tech bg-info">Flutter</span>
+                                <span class="badge badge-tech bg-dark">Appwrite</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 -->
+                    <div class="card project-card mb-4">
+                        <div class="card-body">
+                            <div class="project-emoji">📱</div>
+                            <h3 class="mb-2">Social & Media Features (Mobile)</h3>
+                            <p class="text-muted mb-3">Instagram-style features using Flutter and React Native</p>
+                            <ul class="mb-3">
+                                <li>Full-screen camera preview</li>
+                                <li>Post / Story creation flow</li>
+                                <li>Direct media upload</li>
+                                <li>Caption handling and UX-optimized flows</li>
+                            </ul>
+                            <div>
+                                <strong>Stack:</strong>
+                                <span class="badge badge-tech bg-info">Flutter</span>
+                                <span class="badge badge-tech bg-warning text-dark">React Native</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 5 -->
+                    <div class="card project-card mb-4">
+                        <div class="card-body">
+                            <div class="project-emoji">🌐</div>
+                            <h3 class="mb-2">Interactive Learning & Games (Web)</h3>
+                            <p class="text-muted mb-3">Integrated interactive games into learning platforms using Next.js</p>
+                            <ul class="mb-3">
+                                <li>Modular game logic</li>
+                                <li>Keyboard & mobile controls</li>
+                                <li>Gamified user engagement</li>
+                            </ul>
+                            <div>
+                                <strong>Stack:</strong>
+                                <span class="badge badge-tech bg-primary">Next.js</span>
+                                <span class="badge badge-tech bg-secondary">JavaScript</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How I Work Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="section-title">How I Work</h2>
+                    <div class="row mt-4">
+                        <div class="col-md-6 mb-3">
+                            <div class="card card-equal-height">
+                                <div class="card-body">
+                                    <h5><i class="bi bi-diagram-3 text-primary me-2"></i>System-first thinking</h5>
+                                    <p class="mb-0">Not screen-first</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="card card-equal-height">
+                                <div class="card-body">
+                                    <h5><i class="bi bi-arrow-left-right text-success me-2"></i>Clear data flows</h5>
+                                    <p class="mb-0">Before UI</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="card card-equal-height">
+                                <div class="card-body">
+                                    <h5><i class="bi bi-check-circle text-info me-2"></i>Testable logic</h5>
+                                    <p class="mb-0">Maintainable architecture</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="card card-equal-height">
+                                <div class="card-body">
+                                    <h5><i class="bi bi-speedometer2 text-warning me-2"></i>Speed & Quality</h5>
+                                    <p class="mb-0">Strong balance</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Looking Ahead Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="section-title">Looking Ahead</h2>
+                    <div class="mt-4">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item bg-transparent">
+                                <i class="bi bi-rocket-takeoff text-primary me-2"></i>
+                                Advanced AI-driven learning platforms
+                            </li>
+                            <li class="list-group-item bg-transparent">
+                                <i class="bi bi-gear text-success me-2"></i>
+                                Rust + React Native integrations
+                            </li>
+                            <li class="list-group-item bg-transparent">
+                                <i class="bi bi-server text-info me-2"></i>
+                                High-performance backend systems
+                            </li>
+                            <li class="list-group-item bg-transparent">
+                                <i class="bi bi-currency-dollar text-warning me-2"></i>
+                                SaaS monetization & credit models
+                            </li>
+                            <li class="list-group-item bg-transparent">
+                                <i class="bi bi-tools text-danger me-2"></i>
+                                Developer tooling & DX optimization
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="section-title d-inline-block">Let's Build Something</h2>
+                    <p class="lead mt-4 mb-4">
+                        If you're building a startup, SaaS product, AI platform, or mobile app, I'm always open to meaningful collaboration.
+                    </p>
+                    <div class="d-flex justify-content-center gap-2 gap-md-3 flex-wrap">
+                        <a href="mailto:ansh@example.com" class="btn btn-primary btn-lg">
+                            <i class="bi bi-envelope me-2"></i>Email Me
+                        </a>
+                        <a href="https://github.com" target="_blank" class="btn btn-outline-dark btn-lg">
+                            <i class="bi bi-github me-2"></i>GitHub
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" class="btn btn-outline-primary btn-lg">
+                            <i class="bi bi-linkedin me-2"></i>LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <p class="mb-0">&copy; 2026 Ansh. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0">Built with Bootstrap & passion for great engineering</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Smooth Scrolling -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            } else {
+                navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
+            }
+        });
+    </script>
+
+</body>
+</html>
